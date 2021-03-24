@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.fastSellingDrinks.mapper.AssessesMapper">
+  <resultMap id="BaseResultMap" type="com.nju.fastSellingDrinks.model.Assesses">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="deliveryman_id" jdbcType="INTEGER" property="deliverymanId" />
+    <result column="deliveryman_grade" jdbcType="INTEGER" property="deliverymanGrade" />
+    <result column="order_grade" jdbcType="INTEGER" property="orderGrade" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from assesses
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.Assesses">
+    insert into assesses (id, order_id, customer_id, 
+      deliveryman_id, deliveryman_grade, order_grade
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
+      #{deliverymanId,jdbcType=INTEGER}, #{deliverymanGrade,jdbcType=INTEGER}, #{orderGrade,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.Assesses">
+    update assesses
+    set order_id = #{orderId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      deliveryman_id = #{deliverymanId,jdbcType=INTEGER},
+      deliveryman_grade = #{deliverymanGrade,jdbcType=INTEGER},
+      order_grade = #{orderGrade,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, order_id, customer_id, deliveryman_id, deliveryman_grade, order_grade
+    from assesses
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_id, customer_id, deliveryman_id, deliveryman_grade, order_grade
+    from assesses
+  </select>
+</mapper>

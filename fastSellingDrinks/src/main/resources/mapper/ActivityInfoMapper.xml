@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.fastSellingDrinks.mapper.ActivityInfoMapper">
+  <resultMap id="BaseResultMap" type="com.nju.fastSellingDrinks.model.ActivityInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_start" jdbcType="TIMESTAMP" property="endStart" />
+    <result column="coupon_id" jdbcType="INTEGER" property="couponId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.ActivityInfo">
+    insert into activity_info (id, name, start_time, 
+      end_start, coupon_id)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endStart,jdbcType=TIMESTAMP}, #{couponId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.ActivityInfo">
+    update activity_info
+    set name = #{name,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_start = #{endStart,jdbcType=TIMESTAMP},
+      coupon_id = #{couponId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, start_time, end_start, coupon_id
+    from activity_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, start_time, end_start, coupon_id
+    from activity_info
+  </select>
+</mapper>
