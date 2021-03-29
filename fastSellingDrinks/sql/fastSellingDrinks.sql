@@ -1,8 +1,7 @@
 /*==============================================================*/
 /* DBMS name:      Sybase SQL Anywhere 12                       */
-/* Created on:     2021/3/25 0:54:26                            */
+/* Created on:     2021/3/29 15:38:00                           */
 /*==============================================================*/
-
 
 /*
 if exists(select 1 from sys.sysforeignkey where role='FK_ACTIVITY_REFERENCE_COUPON_I') then
@@ -40,19 +39,29 @@ if exists(select 1 from sys.sysforeignkey where role='FK_ASSESSES_REFERENCE_DELI
        delete foreign key FK_ASSESSES_REFERENCE_DELIVERY
 end if;
 
-if exists(select 1 from sys.sysforeignkey where role='FK_COMBINAT_REFERENCE_PRODUCT_') then
-    alter table combination
-       delete foreign key FK_COMBINAT_REFERENCE_PRODUCT_
+if exists(select 1 from sys.sysforeignkey where role='FK_COMBINAT_REFERENCE_COMBINAT') then
+    alter table combination_item
+       delete foreign key FK_COMBINAT_REFERENCE_COMBINAT
 end if;
 
-if exists(select 1 from sys.sysforeignkey where role='FK_ORDER_IN_REFERENCE_PRODUCT_') then
-    alter table order_info
-       delete foreign key FK_ORDER_IN_REFERENCE_PRODUCT_
+if exists(select 1 from sys.sysforeignkey where role='FK_COMBINAT_REFERENCE_PRODUCT_') then
+    alter table combination_item
+       delete foreign key FK_COMBINAT_REFERENCE_PRODUCT_
 end if;
 
 if exists(select 1 from sys.sysforeignkey where role='FK_ORDER_IN_REFERENCE_CUSTOMER') then
     alter table order_info
        delete foreign key FK_ORDER_IN_REFERENCE_CUSTOMER
+end if;
+
+if exists(select 1 from sys.sysforeignkey where role='FK_ORDER_IT_REFERENCE_ORDER_IN') then
+    alter table order_item
+       delete foreign key FK_ORDER_IT_REFERENCE_ORDER_IN
+end if;
+
+if exists(select 1 from sys.sysforeignkey where role='FK_ORDER_IT_REFERENCE_PRODUCT_') then
+    alter table order_item
+       delete foreign key FK_ORDER_IT_REFERENCE_PRODUCT_
 end if;
 
 if exists(select 1 from sys.sysforeignkey where role='FK_ORDER_LO_REFERENCE_ORDER_IN') then
@@ -63,6 +72,16 @@ end if;
 if exists(select 1 from sys.sysforeignkey where role='FK_ORDER_LO_REFERENCE_DELIVERY') then
     alter table order_logistics
        delete foreign key FK_ORDER_LO_REFERENCE_DELIVERY
+end if;
+
+if exists(select 1 from sys.sysforeignkey where role='FK_STOCK_PU_REFERENCE_PRODUCT_') then
+    alter table stock_purchase
+       delete foreign key FK_STOCK_PU_REFERENCE_PRODUCT_
+end if;
+
+if exists(select 1 from sys.sysforeignkey where role='FK_STOCK_PU_REFERENCE_ADMIN_IN') then
+    alter table stock_purchase
+       delete foreign key FK_STOCK_PU_REFERENCE_ADMIN_IN
 end if;
 
 if exists(select 1 from sys.sysforeignkey where role='FK_USER_COU_REFERENCE_CUSTOMER') then
@@ -93,6 +112,8 @@ drop table if exists assesses;
 
 drop table if exists combination;
 
+drop table if exists combination_item;
+
 drop table if exists coupon_info;
 
 drop table if exists customer_info;
@@ -101,9 +122,13 @@ drop table if exists deliveryman;
 
 drop table if exists order_info;
 
+drop table if exists order_item;
+
 drop table if exists order_logistics;
 
 drop table if exists product_info;
+
+drop table if exists stock_purchase;
 
 drop table if exists user_coupon;
 
@@ -168,6 +193,7 @@ create table assesses
    deliveryman_id       int                            null,
    deliveryman_grade    int                            null,
    order_grade          int                            null,
+   "message"            varchar(654)                   null,
    constraint PK_ASSESSES primary key clustered (id)
 );
 
@@ -178,12 +204,25 @@ create table combination
 (
    id                   int                            not null,
    name                 varchar(50)                    null,
-   product_id           int                            null,
+   primary_price        double                         null,
    price                double                         null,
    stock_quantity       int                            null,
    sale_quantity        int                            null,
    grade                double                         null,
    constraint PK_COMBINATION primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: combination_item                                      */
+/*==============================================================*/
+create table combination_item
+(
+   id                   int                            not null,
+   combination_id       int                            null,
+   product_id           int                            null,
+   price                double                         null,
+   num                  int                            null,
+   constraint PK_COMBINATION_ITEM primary key clustered (id)
 );
 
 /*==============================================================*/
@@ -226,6 +265,7 @@ create table deliveryman
    phone                varchar(50)                    null,
    status               char                           null,
    grade                double                         null,
+   num                  int                            null,
    constraint PK_DELIVERYMAN primary key clustered (id)
 );
 
@@ -239,12 +279,24 @@ create table order_info
    order_time           datetime                       null,
    pay_time             datetime                       null,
    logistics_fee        double                         null,
-   product_id           int                            null,
    product_count        int                            null,
    product_amount_total double                         null,
    order_amount_total   double                         null,
    status               char                           null,
    constraint PK_ORDER_INFO primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: order_item                                            */
+/*==============================================================*/
+create table order_item
+(
+   id                   int                            not null,
+   order_id             int                            null,
+   product_id           int                            null,
+   price                double                         null,
+   num                  int                            null,
+   constraint PK_ORDER_ITEM primary key clustered (id)
 );
 
 /*==============================================================*/
@@ -275,7 +327,26 @@ create table product_info
    stock_quantity       int                            null,
    sale_quantity        int                            null,
    grade                double                         null,
+   manufacture_date     datetime                       null,
+   guarantee_period     datetime                       null,
+   isbn                 char                           null,
+   sugar                int                            null,
+   temperature          double                         null,
    constraint PK_PRODUCT_INFO primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: stock_purchase                                        */
+/*==============================================================*/
+create table stock_purchase
+(
+   id                   int                            not null,
+   product_id           int                            null,
+   quantity             int                            null,
+   pdate                datetime                       null,
+   admin_id             int                            null,
+   manufacture_date     datetime                       null,
+   constraint PK_STOCK_PURCHASE primary key clustered (id)
 );
 
 /*==============================================================*/
@@ -300,6 +371,7 @@ create table vip_info
    vip_intergal         int                            null,
    reminder             double                         null,
    start_time           datetime                       null,
+   crad_intergal        int                            null,
    constraint PK_VIP_INFO primary key clustered (id)
 );
 
@@ -345,14 +417,14 @@ alter table assesses
       on update restrict
       on delete restrict;
 
-alter table combination
-   add constraint FK_COMBINAT_REFERENCE_PRODUCT_ foreign key (product_id)
-      references product_info (id)
+alter table combination_item
+   add constraint FK_COMBINAT_REFERENCE_COMBINAT foreign key (combination_id)
+      references combination (id)
       on update restrict
       on delete restrict;
 
-alter table order_info
-   add constraint FK_ORDER_IN_REFERENCE_PRODUCT_ foreign key (product_id)
+alter table combination_item
+   add constraint FK_COMBINAT_REFERENCE_PRODUCT_ foreign key (product_id)
       references product_info (id)
       on update restrict
       on delete restrict;
@@ -360,6 +432,18 @@ alter table order_info
 alter table order_info
    add constraint FK_ORDER_IN_REFERENCE_CUSTOMER foreign key (customer_id)
       references customer_info (id)
+      on update restrict
+      on delete restrict;
+
+alter table order_item
+   add constraint FK_ORDER_IT_REFERENCE_ORDER_IN foreign key (order_id)
+      references order_info (id)
+      on update restrict
+      on delete restrict;
+
+alter table order_item
+   add constraint FK_ORDER_IT_REFERENCE_PRODUCT_ foreign key (product_id)
+      references product_info (id)
       on update restrict
       on delete restrict;
 
@@ -372,6 +456,18 @@ alter table order_logistics
 alter table order_logistics
    add constraint FK_ORDER_LO_REFERENCE_DELIVERY foreign key (deliveryman_id)
       references deliveryman (id)
+      on update restrict
+      on delete restrict;
+
+alter table stock_purchase
+   add constraint FK_STOCK_PU_REFERENCE_PRODUCT_ foreign key (product_id)
+      references product_info (id)
+      on update restrict
+      on delete restrict;
+
+alter table stock_purchase
+   add constraint FK_STOCK_PU_REFERENCE_ADMIN_IN foreign key (admin_id)
+      references admin_info (id)
       on update restrict
       on delete restrict;
 
