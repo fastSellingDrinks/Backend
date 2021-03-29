@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.fastSellingDrinks.mapper.CombinationItemMapper">
+  <resultMap id="BaseResultMap" type="com.nju.fastSellingDrinks.model.CombinationItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="combination_id" jdbcType="INTEGER" property="combinationId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from combination_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.CombinationItem">
+    insert into combination_item (id, combination_id, product_id, 
+      price, num)
+    values (#{id,jdbcType=INTEGER}, #{combinationId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{num,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.CombinationItem">
+    update combination_item
+    set combination_id = #{combinationId,jdbcType=INTEGER},
+      product_id = #{productId,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      num = #{num,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, combination_id, product_id, price, num
+    from combination_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, combination_id, product_id, price, num
+    from combination_item
+  </select>
+</mapper>

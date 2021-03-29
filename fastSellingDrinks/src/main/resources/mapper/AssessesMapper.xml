@@ -8,6 +8,7 @@
     <result column="deliveryman_id" jdbcType="INTEGER" property="deliverymanId" />
     <result column="deliveryman_grade" jdbcType="INTEGER" property="deliverymanGrade" />
     <result column="order_grade" jdbcType="INTEGER" property="orderGrade" />
+    <result column="writing" jdbcType="VARCHAR" property="writing" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from assesses
@@ -15,11 +16,11 @@
   </delete>
   <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.Assesses">
     insert into assesses (id, order_id, customer_id, 
-      deliveryman_id, deliveryman_grade, order_grade
-      )
+      deliveryman_id, deliveryman_grade, order_grade, 
+      writing)
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
-      #{deliverymanId,jdbcType=INTEGER}, #{deliverymanGrade,jdbcType=INTEGER}, #{orderGrade,jdbcType=INTEGER}
-      )
+      #{deliverymanId,jdbcType=INTEGER}, #{deliverymanGrade,jdbcType=INTEGER}, #{orderGrade,jdbcType=INTEGER}, 
+      #{writing,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.Assesses">
     update assesses
@@ -27,16 +28,19 @@
       customer_id = #{customerId,jdbcType=INTEGER},
       deliveryman_id = #{deliverymanId,jdbcType=INTEGER},
       deliveryman_grade = #{deliverymanGrade,jdbcType=INTEGER},
-      order_grade = #{orderGrade,jdbcType=INTEGER}
+      order_grade = #{orderGrade,jdbcType=INTEGER},
+      writing = #{writing,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, order_id, customer_id, deliveryman_id, deliveryman_grade, order_grade
+    select id, order_id, customer_id, deliveryman_id, deliveryman_grade, order_grade, 
+    writing
     from assesses
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, order_id, customer_id, deliveryman_id, deliveryman_grade, order_grade
+    select id, order_id, customer_id, deliveryman_id, deliveryman_grade, order_grade, 
+    writing
     from assesses
   </select>
 </mapper>

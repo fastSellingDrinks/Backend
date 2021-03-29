@@ -13,6 +13,8 @@ public class Assesses {
 
     private Integer orderGrade;
 
+    private String writing;
+
     public Integer getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class Assesses {
 
     public void setOrderGrade(Integer orderGrade) {
         this.orderGrade = orderGrade;
+    }
+
+    public String getWriting() {
+        return writing;
+    }
+
+    public void setWriting(String writing) {
+        this.writing = writing == null ? null : writing.trim();
     }
 }

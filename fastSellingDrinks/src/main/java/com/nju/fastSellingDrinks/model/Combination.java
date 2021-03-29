@@ -17,7 +17,7 @@ public class Combination {
 
     private Double grade;
 
-    //Julin
+    //Julin 一对多关联
     private List<ProductInfo> productInfo;
 
     public List<ProductInfo> getProductInfo() {
