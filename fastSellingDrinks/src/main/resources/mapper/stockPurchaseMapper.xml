@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.fastSellingDrinks.mapper.stockPurchaseMapper">
+  <resultMap id="BaseResultMap" type="com.nju.fastSellingDrinks.model.stockPurchase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="pdate" jdbcType="TIMESTAMP" property="pdate" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="manufacture_date" jdbcType="TIMESTAMP" property="manufactureDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stock_purchase
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.stockPurchase">
+    insert into stock_purchase (id, product_id, quantity, 
+      pdate, admin_id, manufacture_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{pdate,jdbcType=TIMESTAMP}, #{adminId,jdbcType=INTEGER}, #{manufactureDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.stockPurchase">
+    update stock_purchase
+    set product_id = #{productId,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      pdate = #{pdate,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      manufacture_date = #{manufactureDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, product_id, quantity, pdate, admin_id, manufacture_date
+    from stock_purchase
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, product_id, quantity, pdate, admin_id, manufacture_date
+    from stock_purchase
+  </select>
+</mapper>

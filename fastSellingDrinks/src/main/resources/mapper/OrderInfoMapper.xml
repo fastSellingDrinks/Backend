@@ -7,7 +7,6 @@
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
     <result column="logistics_fee" jdbcType="DOUBLE" property="logisticsFee" />
-    <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="product_count" jdbcType="INTEGER" property="productCount" />
     <result column="product_amount_total" jdbcType="DOUBLE" property="productAmountTotal" />
     <result column="order_amount_total" jdbcType="DOUBLE" property="orderAmountTotal" />
@@ -19,13 +18,13 @@
   </delete>
   <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.OrderInfo">
     insert into order_info (id, customer_id, order_time, 
-      pay_time, logistics_fee, product_id, 
-      product_count, product_amount_total, order_amount_total, 
-      status)
+      pay_time, logistics_fee, product_count, 
+      product_amount_total, order_amount_total, status
+      )
     values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{payTime,jdbcType=TIMESTAMP}, #{logisticsFee,jdbcType=DOUBLE}, #{productId,jdbcType=INTEGER}, 
-      #{productCount,jdbcType=INTEGER}, #{productAmountTotal,jdbcType=DOUBLE}, #{orderAmountTotal,jdbcType=DOUBLE}, 
-      #{status,jdbcType=CHAR})
+      #{payTime,jdbcType=TIMESTAMP}, #{logisticsFee,jdbcType=DOUBLE}, #{productCount,jdbcType=INTEGER}, 
+      #{productAmountTotal,jdbcType=DOUBLE}, #{orderAmountTotal,jdbcType=DOUBLE}, #{status,jdbcType=CHAR}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.OrderInfo">
     update order_info
@@ -33,7 +32,6 @@
       order_time = #{orderTime,jdbcType=TIMESTAMP},
       pay_time = #{payTime,jdbcType=TIMESTAMP},
       logistics_fee = #{logisticsFee,jdbcType=DOUBLE},
-      product_id = #{productId,jdbcType=INTEGER},
       product_count = #{productCount,jdbcType=INTEGER},
       product_amount_total = #{productAmountTotal,jdbcType=DOUBLE},
       order_amount_total = #{orderAmountTotal,jdbcType=DOUBLE},
@@ -41,14 +39,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, customer_id, order_time, pay_time, logistics_fee, product_id, product_count, 
-    product_amount_total, order_amount_total, status
+    select id, customer_id, order_time, pay_time, logistics_fee, product_count, product_amount_total, 
+    order_amount_total, status
     from order_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, customer_id, order_time, pay_time, logistics_fee, product_id, product_count, 
-    product_amount_total, order_amount_total, status
+    select id, customer_id, order_time, pay_time, logistics_fee, product_count, product_amount_total, 
+    order_amount_total, status
     from order_info
   </select>
 </mapper>

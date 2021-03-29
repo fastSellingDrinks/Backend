@@ -9,6 +9,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="grade" jdbcType="DOUBLE" property="grade" />
+    <result column="num" jdbcType="INTEGER" property="num" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from deliveryman
@@ -16,9 +17,11 @@
   </delete>
   <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.Deliveryman">
     insert into deliveryman (id, name, sex, age, 
-      phone, status, grade)
+      phone, status, grade, num
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, 
-      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{grade,jdbcType=DOUBLE})
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{grade,jdbcType=DOUBLE}, #{num,jdbcType=INTEGER}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.Deliveryman">
     update deliveryman
@@ -27,16 +30,17 @@
       age = #{age,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      grade = #{grade,jdbcType=DOUBLE}
+      grade = #{grade,jdbcType=DOUBLE},
+      num = #{num,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, sex, age, phone, status, grade
+    select id, name, sex, age, phone, status, grade, num
     from deliveryman
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, sex, age, phone, status, grade
+    select id, name, sex, age, phone, status, grade, num
     from deliveryman
   </select>
 </mapper>

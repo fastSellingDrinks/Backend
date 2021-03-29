@@ -1,11 +1,13 @@
 package com.nju.fastSellingDrinks.model;
 
+import java.util.List;
+
 public class Combination {
     private Integer id;
 
     private String name;
 
-    private Integer productId;
+    private Double primaryPrice;
 
     private Double price;
 
@@ -14,6 +16,17 @@ public class Combination {
     private Integer saleQuantity;
 
     private Double grade;
+
+    //Julin
+    private List<ProductInfo> productInfo;
+
+    public List<ProductInfo> getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(List<ProductInfo> productInfo) {
+        this.productInfo = productInfo;
+    }
 
     public Integer getId() {
         return id;
@@ -31,12 +44,12 @@ public class Combination {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Double getPrimaryPrice() {
+        return primaryPrice;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setPrimaryPrice(Double primaryPrice) {
+        this.primaryPrice = primaryPrice;
     }
 
     public Double getPrice() {

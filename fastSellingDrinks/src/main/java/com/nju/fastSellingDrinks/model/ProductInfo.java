@@ -1,5 +1,7 @@
 package com.nju.fastSellingDrinks.model;
 
+import java.util.Date;
+
 public class ProductInfo {
     private Integer id;
 
@@ -14,6 +16,16 @@ public class ProductInfo {
     private Integer saleQuantity;
 
     private Double grade;
+
+    private Date manufactureDate;
+
+    private Date guaranteePeriod;
+
+    private String isbn;
+
+    private Integer sugar;
+
+    private Double temperature;
 
     public Integer getId() {
         return id;
@@ -69,5 +81,45 @@ public class ProductInfo {
 
     public void setGrade(Double grade) {
         this.grade = grade;
+    }
+
+    public Date getManufactureDate() {
+        return manufactureDate;
+    }
+
+    public void setManufactureDate(Date manufactureDate) {
+        this.manufactureDate = manufactureDate;
+    }
+
+    public Date getGuaranteePeriod() {
+        return guaranteePeriod;
+    }
+
+    public void setGuaranteePeriod(Date guaranteePeriod) {
+        this.guaranteePeriod = guaranteePeriod;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn == null ? null : isbn.trim();
+    }
+
+    public Integer getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(Integer sugar) {
+        this.sugar = sugar;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
     }
 }

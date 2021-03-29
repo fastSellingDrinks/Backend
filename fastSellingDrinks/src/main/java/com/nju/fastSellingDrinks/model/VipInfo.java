@@ -15,6 +15,8 @@ public class VipInfo {
 
     private Date startTime;
 
+    private Integer cradIntergal;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class VipInfo {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public Integer getCradIntergal() {
+        return cradIntergal;
+    }
+
+    public void setCradIntergal(Integer cradIntergal) {
+        this.cradIntergal = cradIntergal;
     }
 }

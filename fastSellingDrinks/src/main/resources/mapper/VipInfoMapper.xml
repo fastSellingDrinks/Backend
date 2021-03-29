@@ -8,6 +8,7 @@
     <result column="vip_intergal" jdbcType="INTEGER" property="vipIntergal" />
     <result column="reminder" jdbcType="DOUBLE" property="reminder" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="crad_intergal" jdbcType="INTEGER" property="cradIntergal" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from vip_info
@@ -15,11 +16,11 @@
   </delete>
   <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.VipInfo">
     insert into vip_info (id, customer_id, card_id, 
-      vip_intergal, reminder, start_time
-      )
+      vip_intergal, reminder, start_time, 
+      crad_intergal)
     values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{cardId,jdbcType=INTEGER}, 
-      #{vipIntergal,jdbcType=INTEGER}, #{reminder,jdbcType=DOUBLE}, #{startTime,jdbcType=TIMESTAMP}
-      )
+      #{vipIntergal,jdbcType=INTEGER}, #{reminder,jdbcType=DOUBLE}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{cradIntergal,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.VipInfo">
     update vip_info
@@ -27,16 +28,17 @@
       card_id = #{cardId,jdbcType=INTEGER},
       vip_intergal = #{vipIntergal,jdbcType=INTEGER},
       reminder = #{reminder,jdbcType=DOUBLE},
-      start_time = #{startTime,jdbcType=TIMESTAMP}
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      crad_intergal = #{cradIntergal,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, customer_id, card_id, vip_intergal, reminder, start_time
+    select id, customer_id, card_id, vip_intergal, reminder, start_time, crad_intergal
     from vip_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, customer_id, card_id, vip_intergal, reminder, start_time
+    select id, customer_id, card_id, vip_intergal, reminder, start_time, crad_intergal
     from vip_info
   </select>
 </mapper>

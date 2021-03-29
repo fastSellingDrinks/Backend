@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.nju.fastSellingDrinks.model.Combination">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="primary_price" jdbcType="DOUBLE" property="primaryPrice" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="stock_quantity" jdbcType="INTEGER" property="stockQuantity" />
     <result column="sale_quantity" jdbcType="INTEGER" property="saleQuantity" />
@@ -15,17 +15,17 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.Combination">
-    insert into combination (id, name, product_id, 
+    insert into combination (id, name, primary_price, 
       price, stock_quantity, sale_quantity, 
       grade)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{primaryPrice,jdbcType=DOUBLE}, 
       #{price,jdbcType=DOUBLE}, #{stockQuantity,jdbcType=INTEGER}, #{saleQuantity,jdbcType=INTEGER}, 
       #{grade,jdbcType=DOUBLE})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.Combination">
     update combination
     set name = #{name,jdbcType=VARCHAR},
-      product_id = #{productId,jdbcType=INTEGER},
+      primary_price = #{primaryPrice,jdbcType=DOUBLE},
       price = #{price,jdbcType=DOUBLE},
       stock_quantity = #{stockQuantity,jdbcType=INTEGER},
       sale_quantity = #{saleQuantity,jdbcType=INTEGER},
@@ -33,12 +33,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, product_id, price, stock_quantity, sale_quantity, grade
+    select id, name, primary_price, price, stock_quantity, sale_quantity, grade
     from combination
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, product_id, price, stock_quantity, sale_quantity, grade
+    select id, name, primary_price, price, stock_quantity, sale_quantity, grade
     from combination
   </select>
 </mapper>

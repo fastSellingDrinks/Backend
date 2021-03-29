@@ -15,6 +15,8 @@ public class Deliveryman {
 
     private Double grade;
 
+    private Integer num;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class Deliveryman {
 
     public void setGrade(Double grade) {
         this.grade = grade;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

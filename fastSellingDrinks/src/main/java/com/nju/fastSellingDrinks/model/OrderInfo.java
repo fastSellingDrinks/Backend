@@ -13,8 +13,6 @@ public class OrderInfo {
 
     private Double logisticsFee;
 
-    private Integer productId;
-
     private Integer productCount;
 
     private Double productAmountTotal;
@@ -61,14 +59,6 @@ public class OrderInfo {
 
     public void setLogisticsFee(Double logisticsFee) {
         this.logisticsFee = logisticsFee;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public Integer getProductCount() {
