@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.fastSellingDrinks.mapper.OrderLogisticsMapper">
+  <resultMap id="BaseResultMap" type="com.nju.fastSellingDrinks.model.OrderLogistics">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="deliveryman_id" jdbcType="INTEGER" property="deliverymanId" />
+    <result column="express_no" jdbcType="CHAR" property="expressNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="predict_arrive_time" jdbcType="TIMESTAMP" property="predictArriveTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_logistics
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.OrderLogistics">
+    insert into order_logistics (id, order_id, deliveryman_id, 
+      express_no, name, address, 
+      phone, predict_arrive_time)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{deliverymanId,jdbcType=INTEGER}, 
+      #{expressNo,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{predictArriveTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.OrderLogistics">
+    update order_logistics
+    set order_id = #{orderId,jdbcType=INTEGER},
+      deliveryman_id = #{deliverymanId,jdbcType=INTEGER},
+      express_no = #{expressNo,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      predict_arrive_time = #{predictArriveTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, order_id, deliveryman_id, express_no, name, address, phone, predict_arrive_time
+    from order_logistics
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_id, deliveryman_id, express_no, name, address, phone, predict_arrive_time
+    from order_logistics
+  </select>
+</mapper>

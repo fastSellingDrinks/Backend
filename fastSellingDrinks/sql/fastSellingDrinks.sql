@@ -193,7 +193,7 @@ create table assesses
    deliveryman_id       int                            null,
    deliveryman_grade    int                            null,
    order_grade          int                            null,
-   "message"            varchar(654)                   null,
+   writing              varchar(255)                   null,
    constraint PK_ASSESSES primary key clustered (id)
 );
 
