@@ -11,6 +11,8 @@ public class ProductInfo {
 
     private String components;
 
+    private String picture;
+
     private Integer stockQuantity;
 
     private Integer saleQuantity;
@@ -57,6 +59,14 @@ public class ProductInfo {
 
     public void setComponents(String components) {
         this.components = components == null ? null : components.trim();
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 
     public Integer getStockQuantity() {

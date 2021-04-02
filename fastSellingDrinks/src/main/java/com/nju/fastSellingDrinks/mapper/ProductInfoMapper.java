@@ -13,4 +13,7 @@ public interface ProductInfoMapper {
     List<ProductInfo> selectAll();
 
     int updateByPrimaryKey(ProductInfo record);
+
+    //Julin
+    List<ProductInfo> rankByGrade();
 }

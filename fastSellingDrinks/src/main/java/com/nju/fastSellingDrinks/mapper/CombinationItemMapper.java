@@ -13,4 +13,8 @@ public interface CombinationItemMapper {
     List<CombinationItem> selectAll();
 
     int updateByPrimaryKey(CombinationItem record);
+
+    //根据套餐id查询套餐明细
+    //Julin
+    List<CombinationItem> selectByCombination(Integer combinationId);
 }

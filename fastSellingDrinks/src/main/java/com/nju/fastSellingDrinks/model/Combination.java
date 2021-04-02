@@ -18,14 +18,15 @@ public class Combination {
     private Double grade;
 
     //Julin 一对多关联
-    private List<ProductInfo> productInfo;
 
-    public List<ProductInfo> getProductInfo() {
-        return productInfo;
+    private List<CombinationItem> combinationItem;
+
+    public List<CombinationItem> getCombinationItem() {
+        return combinationItem;
     }
 
-    public void setProductInfo(List<ProductInfo> productInfo) {
-        this.productInfo = productInfo;
+    public void setCombinationItem(List<CombinationItem> combinationItem) {
+        this.combinationItem = combinationItem;
     }
 
     public Integer getId() {

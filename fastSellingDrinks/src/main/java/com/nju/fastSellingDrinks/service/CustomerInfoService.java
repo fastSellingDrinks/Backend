@@ -7,4 +7,7 @@ public interface CustomerInfoService {
     void add(CustomerInfo customerInfo);
 
     CustomerInfo search(Integer id);
+
+    //Julin
+    CustomerInfo selByUsername(CustomerInfo customerInfo);
 }

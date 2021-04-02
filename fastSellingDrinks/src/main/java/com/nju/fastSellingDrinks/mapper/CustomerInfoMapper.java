@@ -13,4 +13,6 @@ public interface CustomerInfoMapper {
     List<CustomerInfo> selectAll();
 
     int updateByPrimaryKey(CustomerInfo record);
+
+    CustomerInfo selectByUsername(String username);
 }

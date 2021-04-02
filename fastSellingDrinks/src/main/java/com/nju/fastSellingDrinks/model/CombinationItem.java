@@ -11,6 +11,18 @@ public class CombinationItem {
 
     private Integer num;
 
+    //一对一关联
+    //Julin
+    private ProductInfo productInfo;
+
+    public ProductInfo getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(ProductInfo productInfo) {
+        this.productInfo = productInfo;
+    }
+
     public Integer getId() {
         return id;
     }
