@@ -6,6 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="components" jdbcType="VARCHAR" property="components" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="stock_quantity" jdbcType="INTEGER" property="stockQuantity" />
     <result column="sale_quantity" jdbcType="INTEGER" property="saleQuantity" />
     <result column="grade" jdbcType="DOUBLE" property="grade" />
@@ -21,21 +22,22 @@
   </delete>
   <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.ProductInfo">
     insert into product_info (id, name, price, 
-      components, stock_quantity, sale_quantity, 
-      grade, manufacture_date, guarantee_period, 
-      isbn, sugar, temperature
-      )
+      components, picture, stock_quantity, 
+      sale_quantity, grade, manufacture_date, 
+      guarantee_period, isbn, sugar, 
+      temperature)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
-      #{components,jdbcType=VARCHAR}, #{stockQuantity,jdbcType=INTEGER}, #{saleQuantity,jdbcType=INTEGER}, 
-      #{grade,jdbcType=DOUBLE}, #{manufactureDate,jdbcType=TIMESTAMP}, #{guaranteePeriod,jdbcType=TIMESTAMP}, 
-      #{isbn,jdbcType=CHAR}, #{sugar,jdbcType=INTEGER}, #{temperature,jdbcType=DOUBLE}
-      )
+      #{components,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{stockQuantity,jdbcType=INTEGER}, 
+      #{saleQuantity,jdbcType=INTEGER}, #{grade,jdbcType=DOUBLE}, #{manufactureDate,jdbcType=TIMESTAMP}, 
+      #{guaranteePeriod,jdbcType=TIMESTAMP}, #{isbn,jdbcType=CHAR}, #{sugar,jdbcType=INTEGER}, 
+      #{temperature,jdbcType=DOUBLE})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nju.fastSellingDrinks.model.ProductInfo">
     update product_info
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
       components = #{components,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
       stock_quantity = #{stockQuantity,jdbcType=INTEGER},
       sale_quantity = #{saleQuantity,jdbcType=INTEGER},
       grade = #{grade,jdbcType=DOUBLE},
@@ -47,14 +49,19 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, price, components, stock_quantity, sale_quantity, grade, manufacture_date, 
-    guarantee_period, isbn, sugar, temperature
+    select id, name, price, components, picture, stock_quantity, sale_quantity, grade, 
+    manufacture_date, guarantee_period, isbn, sugar, temperature
     from product_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, price, components, stock_quantity, sale_quantity, grade, manufacture_date, 
-    guarantee_period, isbn, sugar, temperature
+    select id, name, price, components, picture, stock_quantity, sale_quantity, grade, 
+    manufacture_date, guarantee_period, isbn, sugar, temperature
     from product_info
+  </select>
+  <select id="rankByGrade" resultMap="BaseResultMap">
+    select name,price,picture,grade
+    from product_info
+    order by grade desc limit 10
   </select>
 </mapper>
