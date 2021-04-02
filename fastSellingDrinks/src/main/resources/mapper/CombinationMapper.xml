@@ -10,11 +10,32 @@
     <result column="sale_quantity" jdbcType="INTEGER" property="saleQuantity" />
     <result column="grade" jdbcType="DOUBLE" property="grade" />
   </resultMap>
+  <!-- Julin -->
+  <resultMap id="collectionMap" type="com.nju.fastSellingDrinks.model.Combination" extends="BaseResultMap">
+    <!-- 一对多关联-->
+    <collection property="combinationItem" ofType="com.nju.fastSellingDrinks.model.CombinationItem">
+      <id column="cid" jdbcType="INTEGER" property="id" />
+      <result column="combination_id" jdbcType="INTEGER" property="combinationId" />
+      <result column="product_id" jdbcType="INTEGER" property="productId" />
+      <result column="price" jdbcType="DOUBLE" property="price" />
+      <result column="num" jdbcType="INTEGER" property="num" />
+      <!-- 一对一关联 -->
+      <association property="productInfo" column="product_id" javaType="com.nju.fastSellingDrinks.model.ProductInfo">
+        <id column="pid" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="price" jdbcType="DOUBLE" property="price" />
+        <result column="grade" jdbcType="DOUBLE" property="grade" />
+      </association>
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from combination
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.Combination">
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.Combination"
+          useGeneratedKeys="true"
+          keyProperty="id"
+  >
     insert into combination (id, name, primary_price, 
       price, stock_quantity, sale_quantity, 
       grade)
@@ -40,5 +61,19 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, primary_price, price, stock_quantity, sale_quantity, grade
     from combination
+  </select>
+  <select id="selectConnAll" parameterType="Integer" resultMap="collectionMap">
+    select c.id,c.name,c.primary_price,c.price,c.stock_quantity,c.sale_quantity,c.grade,
+           ci.id cid,ci.combination_id,ci.product_id,ci.price,ci.num,
+           p.id pid,p.name,p.price,p.grade
+    from combination c
+         inner join combination_item ci on c.id=ci.combination_id
+         inner join product_info p on ci.product_id=p.id
+    where c.id=#{combinationId}
+  </select>
+  <select id="rankByGrade" resultMap="BaseResultMap">
+    select name,price,grade
+    from combination
+    order by grade desc limit 5
   </select>
 </mapper>

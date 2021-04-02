@@ -43,4 +43,9 @@
     select id, name, sex, age, phone, address, username, password
     from customer_info
   </select>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id,name,sex,age,phone,address,username,password
+    from customer_info
+    where username=#{username}
+  </select>
 </mapper>
