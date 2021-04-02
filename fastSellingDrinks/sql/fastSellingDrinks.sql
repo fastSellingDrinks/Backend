@@ -324,6 +324,7 @@ create table product_info
    name                 varchar(50)                    null,
    price                double                         null,
    components           varchar(255)                   null,
+   picture              varchar(255)                   null,
    stock_quantity       int                            null,
    sale_quantity        int                            null,
    grade                double                         null,
