@@ -23,16 +23,26 @@ public class CombinationController {
     private CombinationService combinationService;
 
     @RequestMapping("add")
-    public ResultVO add(@RequestBody Combination combination){
-        int id=combinationService.add(combination);
-        ResultVO resultVO=new ResultVO(200);
-        resultVO.setObject(id);
-        return resultVO;
+    public String add(@RequestBody Combination combination){
+        combinationService.add(combination);
+        return "success";
     }
 
-    @RequestMapping("selectAll/{combinationId}")
-    public PageInfo<Combination> selectAll(@PathVariable Integer combinationId){
-        return combinationService.selConnAll(combinationId);
+    @RequestMapping("del/{id}")
+    public String del(@PathVariable Integer id){
+        combinationService.del(id);
+        return "success";
+    }
+
+    @RequestMapping("update")
+    public String update(@RequestBody Combination combination){
+        combinationService.update(combination);
+        return "success";
+    }
+
+    @RequestMapping("selectAll/{currPage}")
+    public PageInfo<Combination> selectAll(@PathVariable Integer currPage){
+        return combinationService.selConnAll(currPage);
     }
 
     @RequestMapping("search/{id}")
@@ -40,10 +50,24 @@ public class CombinationController {
         return combinationService.search(id);
     }
 
-    @RequestMapping("rank")
-    public List<Combination> rank(){
-
+    @RequestMapping("rankByGrade")
+    public List<Combination> rankByGrade(){
         return combinationService.combinationRank();
+    }
+
+    @RequestMapping("rankByDiscount")
+    public List<Combination> rankByDiscount(){
+        return combinationService.combinationRankByDiscount();
+    }
+
+    @RequestMapping("rankBySaleQuantity")
+    public List<Combination> rankBySaleQuantity(){
+        return combinationService.combinationRankBySaleQuantity();
+    }
+
+    @RequestMapping("select/{currPage}")
+    public PageInfo<Combination> select(@PathVariable Integer currPage, @RequestBody Combination combination){
+        return combinationService.list(currPage,combination);
     }
 
 }

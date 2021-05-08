@@ -1,6 +1,7 @@
 package com.nju.fastSellingDrinks.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrderInfo {
     private Integer id;
@@ -20,6 +21,17 @@ public class OrderInfo {
     private Double orderAmountTotal;
 
     private String status;
+
+    //一对多关联
+    private List<OrderItem> orderItem;
+
+    public List<OrderItem> getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(List<OrderItem> orderItem) {
+        this.orderItem = orderItem;
+    }
 
     public Integer getId() {
         return id;

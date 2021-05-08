@@ -11,16 +11,20 @@ public interface CombinationMapper {
 
     Combination selectByPrimaryKey(Integer id);
 
-    List<Combination> selectAll();
+    List<Combination> select(Combination combination);
 
     int updateByPrimaryKey(Combination record);
 
     //Julin
-    //根据套餐id查询所有套餐内所有商品
-    List<Combination> selectConnAll(Integer combinationId);
+    //查询所有套餐内所有商品
+    List<Combination> selectConnAll();
 
     //Julin
-    //评分排行
+    //套餐推荐
     List<Combination> rankByGrade();
+
+    List<Combination> rankByDiscount();
+
+    List<Combination> rankBySaleQuantity();
 
 }

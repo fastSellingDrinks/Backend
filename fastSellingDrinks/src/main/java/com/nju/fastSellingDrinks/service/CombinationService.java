@@ -1,3 +1,4 @@
+//Author Julin
 package com.nju.fastSellingDrinks.service;
 
 import com.github.pagehelper.PageInfo;
@@ -9,10 +10,19 @@ public interface CombinationService {
 
     int add(Combination combination);
 
-    PageInfo<Combination> selConnAll(Integer combinationId);
+    void del(Integer id);
+
+    Combination update(Combination combination);
+
+    PageInfo<Combination> selConnAll(Integer currPage);
 
     Combination search(Integer combinationId);
 
     List<Combination> combinationRank();
 
+    List<Combination> combinationRankByDiscount();
+
+    List<Combination> combinationRankBySaleQuantity();
+
+    PageInfo list(Integer currPage, Combination combination);
 }

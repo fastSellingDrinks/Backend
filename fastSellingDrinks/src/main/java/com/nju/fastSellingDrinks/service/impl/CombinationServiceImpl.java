@@ -33,8 +33,21 @@ public class CombinationServiceImpl implements CombinationService {
     }
 
     @Override
-    public PageInfo<Combination> selConnAll(Integer combinationId) {
-        return new PageInfo<>(combinationMapper.selectConnAll(combinationId));
+    public void del(Integer id) {
+        combinationMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Combination update(Combination combination) {
+        combinationMapper.updateByPrimaryKey(combination);
+        return combination;
+    }
+
+    @Override
+    public PageInfo<Combination> selConnAll(Integer currPage) {
+        if (currPage==null) currPage=1;
+        PageHelper.startPage(currPage,Define.ADMIN_PRODUCT_PAGE_SIZE);
+        return new PageInfo<>(combinationMapper.selectConnAll());
     }
 
     @Override
@@ -45,5 +58,22 @@ public class CombinationServiceImpl implements CombinationService {
     @Override
     public List<Combination> combinationRank() {
         return combinationMapper.rankByGrade();
+    }
+
+    @Override
+    public List<Combination> combinationRankByDiscount() {
+        return combinationMapper.rankByDiscount();
+    }
+
+    @Override
+    public List<Combination> combinationRankBySaleQuantity() {
+        return combinationMapper.rankBySaleQuantity();
+    }
+
+    @Override
+    public PageInfo list(Integer currPage, Combination combination) {
+        if (currPage ==null) currPage=1;
+        PageHelper.startPage(currPage, Define.ADMIN_PRODUCT_PAGE_SIZE);
+        return new PageInfo<>(combinationMapper.select(combination));
     }
 }

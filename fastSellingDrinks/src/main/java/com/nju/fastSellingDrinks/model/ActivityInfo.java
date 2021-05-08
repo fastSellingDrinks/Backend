@@ -1,6 +1,7 @@
 package com.nju.fastSellingDrinks.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class ActivityInfo {
     private Integer id;
@@ -11,7 +12,17 @@ public class ActivityInfo {
 
     private Date endStart;
 
-    private Integer couponId;
+
+    //Julin 一对多关联
+    private List<ActivityCoupon> activityCoupon;
+
+    public List<ActivityCoupon> getActivityCoupons() {
+        return activityCoupon;
+    }
+
+    public void setActivityCoupons(List<ActivityCoupon> activityCoupon) {
+        this.activityCoupon = activityCoupon;
+    }
 
     public Integer getId() {
         return id;
@@ -45,11 +56,4 @@ public class ActivityInfo {
         this.endStart = endStart;
     }
 
-    public Integer getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(Integer couponId) {
-        this.couponId = couponId;
-    }
 }
