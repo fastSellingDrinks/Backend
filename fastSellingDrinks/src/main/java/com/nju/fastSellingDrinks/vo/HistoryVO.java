@@ -2,24 +2,23 @@ package com.nju.fastSellingDrinks.vo;
 
 public class HistoryVO {
 
-    private Integer id;
+    //商品id
+    private Integer productId;
 
-    //商品或套餐名称
+    //商品名称
     private String name;
 
-    //价格
-    private Double price;
-
-    private Double pprice;
+    //商品价格
+    private Double productPrice;
 
     private Double grade;
 
-    public Integer getId() {
-        return id;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -30,20 +29,12 @@ public class HistoryVO {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getProductPrice() {
+        return productPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Double getPprice() {
-        return pprice;
-    }
-
-    public void setPprice(Double pprice) {
-        this.pprice = pprice;
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
     }
 
     public Double getGrade() {

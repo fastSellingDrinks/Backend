@@ -1,5 +1,7 @@
 package com.nju.fastSellingDrinks.vo;
 
+import java.sql.Date;
+
 public class OrdersSumVO {
 
     //需要统计的用户ＩＤ
@@ -10,6 +12,10 @@ public class OrdersSumVO {
 
     //返回的统计结果（月）
     private Integer month;
+
+    private Integer week;
+
+    private Date day;
 
     //返回的统计结果（消费金额）
     private Double total;
@@ -36,6 +42,22 @@ public class OrdersSumVO {
 
     public void setMonth(Integer month) {
         this.month = month;
+    }
+
+    public Integer getWeek() {
+        return week;
+    }
+
+    public void setWeek(Integer week) {
+        this.week = week;
+    }
+
+    public Date getDay() {
+        return day;
+    }
+
+    public void setDay(Date day) {
+        this.day = day;
     }
 
     public Double getTotal() {
