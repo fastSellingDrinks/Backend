@@ -11,7 +11,10 @@
     delete from coupon_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.CouponInfo">
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.CouponInfo"
+          useGeneratedKeys="true"
+          keyProperty="id"
+  >
     insert into coupon_info (id, description, target_amount, 
       discount_amount)
     values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{targetAmount,jdbcType=DOUBLE}, 
@@ -33,4 +36,10 @@
     select id, description, target_amount, discount_amount
     from coupon_info
   </select>
+  <select id="selectByDescription" resultMap="BaseResultMap">
+    select id, description, target_amount, discount_amount
+    from coupon_info
+    where description = #{description}
+  </select>
+
 </mapper>

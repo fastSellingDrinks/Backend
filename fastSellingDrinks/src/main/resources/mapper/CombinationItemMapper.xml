@@ -14,6 +14,7 @@
       <id column="pid" jdbcType="INTEGER" property="id" />
       <result column="name" jdbcType="VARCHAR" property="name" />
       <result column="price" jdbcType="DOUBLE" property="price" />
+      <result column="picture" jdbcType="VARCHAR" property="picture" />
       <result column="components" jdbcType="VARCHAR" property="components" />
       <result column="grade" jdbcType="DOUBLE" property="grade" />
       <result column="sugar" jdbcType="INTEGER" property="sugar" />
@@ -24,8 +25,10 @@
     delete from combination_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.CombinationItem">
-    insert into combination_item (id, combination_id, product_id, 
+  <insert id="insert" parameterType="com.nju.fastSellingDrinks.model.CombinationItem"
+          useGeneratedKeys="true"
+          keyProperty="id">
+    insert ignore into combination_item (id, combination_id, product_id,
       price, num)
     values (#{id,jdbcType=INTEGER}, #{combinationId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
       #{price,jdbcType=DOUBLE}, #{num,jdbcType=INTEGER})
@@ -49,7 +52,7 @@
   </select>
   <select id="selectByCombination" parameterType="Integer" resultMap="connectionMap">
     select ci.id,ci.combination_id,ci.product_id,ci.price,ci.num,
-           p.id pid,p.name,p.price,p.components,p.grade,p.sugar,p.temperature
+           p.id pid,p.name,p.picture, p.price,p.components,p.grade,p.sugar,p.temperature
     from combination_item ci
     inner join product_info p on ci.product_id=p.id
     where ci.combination_id=#{combinationId}

@@ -12,6 +12,62 @@
     <result column="order_amount_total" jdbcType="DOUBLE" property="orderAmountTotal" />
     <result column="status" jdbcType="CHAR" property="status" />
   </resultMap>
+
+  <resultMap id="collectionMap" type="com.nju.fastSellingDrinks.model.OrderInfo" extends="BaseResultMap">
+    <!-- 一对多关联-->
+    <collection property="orderItem" ofType="com.nju.fastSellingDrinks.model.OrderItem">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="order_id" jdbcType="INTEGER" property="orderId" />
+      <result column="product_id" jdbcType="INTEGER" property="productId" />
+      <result column="combination_id" jdbcType="INTEGER" property="combinationId" />
+      <result column="price" jdbcType="DOUBLE" property="price" />
+      <result column="num" jdbcType="INTEGER" property="num" />
+      <!-- 一对一关联 -->
+      <association property="productInfo" column="product_id" javaType="com.nju.fastSellingDrinks.model.ProductInfo">
+        <id column="pid" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="price" jdbcType="DOUBLE" property="price" />
+        <result column="grade" jdbcType="DOUBLE" property="grade" />
+      </association>
+    </collection>
+  </resultMap>
+
+  <resultMap id="collectionTMap" type="com.nju.fastSellingDrinks.model.OrderInfo" extends="BaseResultMap">
+    <collection property="orderItem" ofType="com.nju.fastSellingDrinks.model.OrderItem">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="order_id" jdbcType="INTEGER" property="orderId" />
+      <result column="product_id" jdbcType="INTEGER" property="productId" />
+      <result column="combination_id" jdbcType="INTEGER" property="combinationId" />
+      <result column="price" jdbcType="DOUBLE" property="price" />
+      <result column="num" jdbcType="INTEGER" property="num" />
+
+      <association property="combination" column="combination_id" javaType="com.nju.fastSellingDrinks.model.Combination">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="primary_price" jdbcType="DOUBLE" property="primaryPrice" />
+        <result column="price" jdbcType="DOUBLE" property="price" />
+        <result column="stock_quantity" jdbcType="INTEGER" property="stockQuantity" />
+        <result column="sale_quantity" jdbcType="INTEGER" property="saleQuantity" />
+        <result column="grade" jdbcType="DOUBLE" property="grade" />
+
+        <collection property="combinationItem" ofType="com.nju.fastSellingDrinks.model.CombinationItem">
+          <id column="cid" jdbcType="INTEGER" property="id" />
+          <result column="combination_id" jdbcType="INTEGER" property="combinationId" />
+          <result column="product_id" jdbcType="INTEGER" property="productId" />
+          <result column="price" jdbcType="DOUBLE" property="price" />
+          <result column="num" jdbcType="INTEGER" property="num" />
+          <!-- 一对一关联 -->
+          <association property="productInfo" column="product_id" javaType="com.nju.fastSellingDrinks.model.ProductInfo">
+            <id column="pid" jdbcType="INTEGER" property="id" />
+            <result column="name" jdbcType="VARCHAR" property="name" />
+            <result column="price" jdbcType="DOUBLE" property="price" />
+            <result column="grade" jdbcType="DOUBLE" property="grade" />
+          </association>
+        </collection>
+      </association>
+    </collection>
+  </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from order_info
     where id = #{id,jdbcType=INTEGER}
@@ -49,4 +105,62 @@
     order_amount_total, status
     from order_info
   </select>
+  <select id="sumByMonth" parameterType="com.nju.fastSellingDrinks.vo.OrdersSumVO" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select month(order_time) month, sum(order_amount_total) total from order_info
+    where year(order_time)=#{year}
+    group by month(order_time)
+  </select>
+  <select id="sumByMonthCustomer" parameterType="com.nju.fastSellingDrinks.vo.OrdersSumVO" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select month(order_time) month, sum(order_amount_total) total from order_info
+    where customer_id = #{customerId,jdbcType=INTEGER} and year(order_time)=#{year}
+    group by month(order_time)
+  </select>
+  <select id="sumByYear" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select year(order_time) year, sum(order_amount_total) total from order_info
+    group by year(order_time)
+    order by year asc
+  </select>
+  <select id="sumByYearCustomer" parameterType="java.lang.Integer" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select year(order_time) year, sum(order_amount_total) total from order_info
+    where customer_id = #{customerId}
+    group by year(order_time)
+    order by year asc
+  </select>
+  <select id="sumByWeek" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select week(order_time) week, sum(order_amount_total) total from order_info
+    group by week(order_time)
+    order by week asc
+  </select>
+  <select id="sumByWeekCustomer" parameterType="java.lang.Integer" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select week(order_time) week, sum(order_amount_total) total from order_info
+    where customer_id = #{customerId}
+    group by week(order_time)
+  </select>
+  <select id="sumByDay" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select date_format(order_time,'%Y-%m-%d') day, sum(order_amount_total) total from order_info
+    where to_days(now()) - to_days(order_time) <![CDATA[ <= ]]> 60
+    group by date_format(order_time,'%Y-%m-%d')
+  </select>
+  <select id="sumByDayCustomer" parameterType="java.lang.Integer" resultType="com.nju.fastSellingDrinks.vo.OrdersSumVO">
+    select date_format(order_time,'%Y-%m-%d') day, sum(order_amount_total) total from order_info
+    where customer_id = #{customerId}
+        and to_days(now()) - to_days(order_time) <![CDATA[ <= ]]> 30
+    group by date_format(order_time,'%Y-%m-%d')
+  </select>
+  <select id="selectProductHistory" parameterType="java.lang.Integer" resultType="com.nju.fastSellingDrinks.vo.HistoryVO">
+    select p.id productId, p.name name, p.price productPrice, p.grade grade
+    from order_info o
+        inner join order_item oi on o.id=oi.order_id
+        inner join product_info p on oi.product_id=p.id
+    where o.customer_id=#{customerId}
+  </select>
+  <select id="selectCombinationHistory" parameterType="java.lang.Integer" resultType="com.nju.fastSellingDrinks.vo.HistoryVO">
+    select oi.combination_id, oi.price, oi.num,
+           c.id id, c.name name, c.price price, c.primary_price pprice, c.grade grade
+    from order_info o
+    inner join order_item oi on o.id = oi.order_id
+    inner join combination c on oi.combination_id = c.id
+    where o.customer_id=#{customerId}
+  </select>
+  
 </mapper>
