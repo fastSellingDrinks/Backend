@@ -7,6 +7,8 @@ public class UserCoupon {
 
     private Integer couponId;
 
+    private CouponInfo couponInfo;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class UserCoupon {
 
     public void setCouponId(Integer couponId) {
         this.couponId = couponId;
+    }
+
+    public CouponInfo getCouponInfo() {
+        return couponInfo;
+    }
+
+    public void setCouponInfo(CouponInfo couponInfo) {
+        this.couponInfo = couponInfo;
     }
 }

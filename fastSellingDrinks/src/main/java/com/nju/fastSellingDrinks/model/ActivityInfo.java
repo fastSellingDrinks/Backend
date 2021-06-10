@@ -16,11 +16,11 @@ public class ActivityInfo {
     //Julin 一对多关联
     private List<ActivityCoupon> activityCoupon;
 
-    public List<ActivityCoupon> getActivityCoupons() {
+    public List<ActivityCoupon> getActivityCoupon() {
         return activityCoupon;
     }
 
-    public void setActivityCoupons(List<ActivityCoupon> activityCoupon) {
+    public void setActivityCoupon(List<ActivityCoupon> activityCoupon) {
         this.activityCoupon = activityCoupon;
     }
 
