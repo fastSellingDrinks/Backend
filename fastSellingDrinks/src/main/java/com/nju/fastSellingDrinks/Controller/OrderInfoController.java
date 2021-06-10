@@ -2,6 +2,7 @@ package com.nju.fastSellingDrinks.Controller;
 
 import com.nju.fastSellingDrinks.model.OrderInfo;
 import com.nju.fastSellingDrinks.service.OrderInfoService;
+import com.nju.fastSellingDrinks.vo.HistoryVO;
 import com.nju.fastSellingDrinks.vo.OrdersSumVO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +43,7 @@ public class OrderInfoController {
      * @return
      */
     @RequestMapping("selectProductHistory/{id}")
-    public List<OrderInfo> selectProductHistory(@PathVariable Integer id){
+    public List<HistoryVO> selectProductHistory(@PathVariable Integer id){
 
         return orderInfoService.selectProductHistory(id);
     }
@@ -56,4 +57,36 @@ public class OrderInfoController {
     public List<OrderInfo> selectCombinationHistory(@PathVariable Integer id){
         return orderInfoService.selectCombinationHistory(id);
     }
+
+    @RequestMapping("sumByYear")
+    public List<OrdersSumVO> sumByYear(){
+        return orderInfoService.sumByYear();
+    }
+
+    @RequestMapping("sumByYearCustomer/{customerId}")
+    public List<OrdersSumVO> sumByYearCustomer(@PathVariable Integer customerId){
+        return orderInfoService.sumByYearCustomer(customerId);
+    }
+
+    @RequestMapping("sumByWeek")
+    public List<OrdersSumVO> sumByWeek(){
+        return orderInfoService.sumByWeek();
+    }
+
+    @RequestMapping("sumByWeekCustomer/{customerId}")
+    public List<OrdersSumVO> sumByWeekCustomer(@PathVariable Integer customerId){
+        return orderInfoService.sumByWeekCustomer(customerId);
+    }
+
+    @RequestMapping("sumByDay")
+    public List<OrdersSumVO> sumByDay(){
+        return orderInfoService.sumByDay();
+    }
+
+    @RequestMapping("sumByDayCustomer/{customerId}")
+    public List<OrdersSumVO> sumByDayCustomer(@PathVariable Integer customerId){
+        return orderInfoService.sumByDayCustomer(customerId);
+    }
+
+
 }

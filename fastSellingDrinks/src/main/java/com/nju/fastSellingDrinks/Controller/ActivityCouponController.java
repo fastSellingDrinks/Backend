@@ -1,6 +1,7 @@
 package com.nju.fastSellingDrinks.Controller;
 
 import com.nju.fastSellingDrinks.model.ActivityCoupon;
+import com.nju.fastSellingDrinks.model.ActivityInfo;
 import com.nju.fastSellingDrinks.service.ActivityCouponService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

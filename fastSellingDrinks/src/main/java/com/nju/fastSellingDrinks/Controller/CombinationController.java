@@ -65,6 +65,11 @@ public class CombinationController {
         return combinationService.combinationRankBySaleQuantity();
     }
 
+    @RequestMapping("mayBeLike/{customerId}")
+    public List<Combination> mayBeLike(@PathVariable Integer customerId){
+        return combinationService.mayBeLike(customerId);
+    }
+
     @RequestMapping("select/{currPage}")
     public PageInfo<Combination> select(@PathVariable Integer currPage, @RequestBody Combination combination){
         return combinationService.list(currPage,combination);

@@ -40,5 +40,13 @@ public class ActivityInfoController {
         return activityInfoService.listAll(currPage);
     }
 
+    @RequestMapping("search/{activityId}")
+    public ActivityInfo search(@PathVariable Integer activityId){
+        return activityInfoService.search(activityId);
+    }
 
+    @RequestMapping("selectByCouponId/{couponId}")
+    public ActivityInfo selectByCouponId(@PathVariable Integer couponId){
+        return activityInfoService.selectByCouponId(couponId);
+    }
 }

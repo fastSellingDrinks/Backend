@@ -2,6 +2,7 @@ package com.nju.fastSellingDrinks.Controller;
 
 import com.nju.fastSellingDrinks.model.ProductInfo;
 import com.nju.fastSellingDrinks.service.ProductInfoService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +19,15 @@ public class ProductInfoController {
     @RequestMapping("rank")
     public List<ProductInfo> rank(){
         return productInfoService.productRank();
+    }
+
+    @RequestMapping("selectAll")
+    public List<ProductInfo> selectAll(){
+        return productInfoService.selectAll();
+    }
+
+    @RequestMapping("selectById/{id}")
+    public ProductInfo selectById(@PathVariable Integer id){
+        return productInfoService.selectById(id);
     }
 }
