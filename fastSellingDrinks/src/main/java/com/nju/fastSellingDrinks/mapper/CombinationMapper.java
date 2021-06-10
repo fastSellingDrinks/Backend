@@ -2,8 +2,11 @@ package com.nju.fastSellingDrinks.mapper;
 
 import com.github.pagehelper.PageInfo;
 import com.nju.fastSellingDrinks.model.Combination;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public interface CombinationMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -26,5 +29,7 @@ public interface CombinationMapper {
     List<Combination> rankByDiscount();
 
     List<Combination> rankBySaleQuantity();
+
+    List<Combination> selectByProduct(Integer customerId);
 
 }

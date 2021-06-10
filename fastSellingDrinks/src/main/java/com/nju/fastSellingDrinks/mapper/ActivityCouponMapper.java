@@ -1,8 +1,11 @@
 package com.nju.fastSellingDrinks.mapper;
 
 import com.nju.fastSellingDrinks.model.ActivityCoupon;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public interface ActivityCouponMapper {
     int deleteByPrimaryKey(Integer id);
 

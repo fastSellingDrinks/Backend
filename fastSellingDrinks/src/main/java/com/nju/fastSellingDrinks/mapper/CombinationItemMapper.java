@@ -1,8 +1,11 @@
 package com.nju.fastSellingDrinks.mapper;
 
 import com.nju.fastSellingDrinks.model.CombinationItem;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public interface CombinationItemMapper {
     int deleteByPrimaryKey(Integer id);
 
