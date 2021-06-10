@@ -24,5 +24,7 @@ public interface CombinationService {
 
     List<Combination> combinationRankBySaleQuantity();
 
-    PageInfo list(Integer currPage, Combination combination);
+    List<Combination> mayBeLike(Integer customerId);
+
+    PageInfo<Combination> list(Integer currPage, Combination combination);
 }

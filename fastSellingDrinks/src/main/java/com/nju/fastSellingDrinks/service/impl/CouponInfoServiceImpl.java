@@ -9,6 +9,8 @@ import com.nju.fastSellingDrinks.util.Define;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CouponInfoServiceImpl implements CouponInfoService {
 
@@ -37,4 +39,15 @@ public class CouponInfoServiceImpl implements CouponInfoService {
         PageHelper.startPage(currPage, Define.ADMIN_PRODUCT_PAGE_SIZE);
         return new PageInfo<>(couponInfoMapper.selectAll());
     }
+
+    @Override
+    public List<CouponInfo> selAllCoupon() {
+        return couponInfoMapper.selectAll();
+    }
+
+    @Override
+    public CouponInfo selectByDescription(String description) {
+        return couponInfoMapper.selectByDescription(description);
+    }
+
 }

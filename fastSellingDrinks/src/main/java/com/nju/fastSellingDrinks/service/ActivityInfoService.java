@@ -13,5 +13,7 @@ public interface ActivityInfoService {
 
     PageInfo<ActivityInfo> listAll(Integer currPage);
 
+    ActivityInfo search(Integer activityId);
 
+    ActivityInfo selectByCouponId(Integer couponId);
 }

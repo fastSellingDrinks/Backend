@@ -18,4 +18,14 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public List<ProductInfo> productRank() {
         return productInfoMapper.rankByGrade();
     }
+
+    @Override
+    public List<ProductInfo> selectAll() {
+        return productInfoMapper.selectAll();
+    }
+
+    @Override
+    public ProductInfo selectById(Integer id) {
+        return productInfoMapper.selectByPrimaryKey(id);
+    }
 }

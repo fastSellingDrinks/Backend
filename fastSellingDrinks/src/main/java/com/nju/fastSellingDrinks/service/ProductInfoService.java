@@ -8,4 +8,8 @@ public interface ProductInfoService {
 
     //Julin
     List<ProductInfo> productRank();
+
+    List<ProductInfo> selectAll();
+
+    ProductInfo selectById(Integer id);
 }

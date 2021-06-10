@@ -14,7 +14,6 @@ public class ActivityCouponServiceImpl implements ActivityCouponService {
     @Autowired
     private ActivityCouponMapper activityCouponMapper;
 
-
     @Override
     public List<ActivityCoupon> selectAllCoupon(Integer activityId) {
         return activityCouponMapper.selectByActivity(activityId);
